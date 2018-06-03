@@ -1,16 +1,25 @@
-const got = require('got');
+const jsesc = require('jsesc');
+const emoj = require('./emoj');
 
-const fetchEmoj = async input => {
-  // https://emoji.getdango.com/api/emoji?q=clap
-	const response = await got('emoji.getdango.com/api/emoji', {
-		json: true,
-		query: {
-			q: input
-		}
-	});
+exports.middleware = (store) => (next) => (action) => {
 
-	return response.body.results.map(x => x.text);
-};
+  if (!action) {
+    return;
+  }
+
+  if (action.type === 'SESSION_ADD_DATA') {
+    const { data } = action;
+
+    emoj.fetchEmoj( escape(data).replace('%1B%5B0K', '')).then(res => console.log(res));
+
+    console.log('middleware data', data, escape(data).replace('%1B%5B0K', ''));
+    if (/(toggle-window: command not found)|(command not found: toggle-window)/.test(data)) { } else {
+      next(action);
+    }
+  } else {
+    next(action);
+  }
+}
 
 exports.decorateConfig = config => {
   const emojConfig = Object.assign({
@@ -19,19 +28,17 @@ exports.decorateConfig = config => {
     emoj: ['🐱'],
   }, config.emojConfig);
 
-  console.log(config);
-
   return Object.assign({}, config, {
-    cursorColor: 'transparent',
-    termCSS: `
-      ${config.termCSS || ''}
-      .cursor-node::after {
-        content: '${emojConfig.emoj[0]}';
-        font-size: ${emojConfig.fontSize}px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }`,
+    // cursorColor: 'transparent',
+    // termCSS: `
+    //   ${config.termCSS || ''}
+    //   .cursor-node::after {
+    //     content: '${emojConfig.emoj[0]}';
+    //     font-size: ${emojConfig.fontSize}px;
+    //     position: absolute;
+    //     left: 0;
+    //     right: 0;
+    //     bottom: 0;
+    //   }`,
   });
 };
