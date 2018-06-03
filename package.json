@@ -1,0 +1,22 @@
+{
+  "name": "hyper-emoj-cursor",
+  "version": "1.0.0",
+  "description": "Hyper extension to replace your cursor with emoji.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjoydip/hyper-emoj-cursor.git"
+  },
+  "keywords": [
+    "hyper",
+    "cursor",
+    "emoji",
+    "emoj"
+  ],
+  "author": "rjoydip",
+  "license": "MIT",
+  "dependencies": {
+    "got": "^8.3.1"
+  }
+}
