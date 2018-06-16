@@ -7,8 +7,7 @@
         "start": "node dist.js",
         "build": "babel index.js --out-file=dist.js",
         "prepublish": "npm run build",
-        "pretest": "npm run build",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "pretest": "npm run build"
     },
     "keywords": [
         "animate",
