@@ -1,0 +1,54 @@
+{
+    "name": "animoji",
+    "version": "1.0.0",
+    "description": "Animated emoji in terminal",
+    "main": "index.js",
+    "scripts": {
+        "start": "node dist.js",
+        "build": "babel index.js --out-file=dist.js",
+        "prepublish": "npm run build",
+        "pretest": "npm run build",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "animate",
+        "emoji",
+        "aniemoji"
+    ],
+    "author": "Joydip Roy (rjoydip)",
+    "license": "MIT",
+    "engines": {
+        "node": ">=6"
+    },
+    "dependencies": {
+        "ink": "^0.5.0",
+        "react": "^16.4.1",
+        "styled-components": "^3.3.2"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-jest": "^22.2.2",
+        "babel-plugin-styled-components": "^1.5.1",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-export-extensions": "^6.22.0",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-react-jsx": "^6.24.1",
+        "babel-preset-env": "^1.6.1",
+        "jest": "^22.2.2"
+    },
+    "files": [
+        "dist.js"
+    ],
+    "babel": {
+        "presets": [],
+        "plugins": [
+            [
+                "transform-react-jsx",
+                {
+                    "pragma": "h",
+                    "useBuiltIns": true
+                }
+            ]
+        ]
+    }
+}
