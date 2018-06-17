@@ -1,53 +1,82 @@
 {
-    "name": "animoji",
-    "version": "1.0.0",
-    "description": "Animated emoji in terminal",
-    "main": "index.js",
-    "scripts": {
-        "start": "node dist.js",
-        "build": "babel index.js --out-file=dist.js",
-        "prepublish": "npm run build",
-        "pretest": "npm run build"
+  "name": "animoji",
+  "version": "1.0.0",
+  "description": "Animated emoji in terminal",
+  "main": "dist/index.js",
+  "keywords": [
+    "animate",
+    "emoji",
+    "aniemoji"
+  ],
+  "author": "Joydip Roy (rjoydip) <joydipand@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "lint": "xo",
+    "test": "npm run build && xo && ava",
+    "build": "babel src --out-dir=dist",
+    "prepublish": "npm run build",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "dependencies": {
+    "got": "^8.3.1",
+    "ink": "^0.5.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.1"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015-node5": "^1.2.0",
+    "eslint-config-xo-react": "^0.13.0",
+    "eslint-plugin-react": "^7.2.1",
+    "eslint-plugin-xo": "^1.0.0",
+    "husky": "^0.14.3",
+    "ink": "^0.5.0",
+    "semantic-release": "^15.4.1",
+    "travis-deploy-once": "^5.0.0",
+    "xo": "^0.18.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "xo": {
+    "extends": "xo-react",
+    "parser": "babel-eslint",
+    "esnext": true,
+    "space": 4,
+    "semicolon": false,
+    "rules": {
+      "new-cap": 0,
+      "complexity": 0,
+      "default-case": 0,
+      "react/no-unused-prop-types": 0,
+      "linebreak-style": 0,
+      "import/no-unresolved": 0
     },
-    "keywords": [
-        "animate",
-        "emoji",
-        "aniemoji"
-    ],
-    "author": "Joydip Roy (rjoydip)",
-    "license": "MIT",
-    "engines": {
-        "node": ">=6"
-    },
-    "dependencies": {
-        "ink": "^0.5.0",
-        "react": "^16.4.1",
-        "styled-components": "^3.3.2"
-    },
-    "devDependencies": {
-        "babel-cli": "^6.26.0",
-        "babel-jest": "^22.2.2",
-        "babel-plugin-styled-components": "^1.5.1",
-        "babel-plugin-transform-class-properties": "^6.24.1",
-        "babel-plugin-transform-export-extensions": "^6.22.0",
-        "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "babel-plugin-transform-react-jsx": "^6.24.1",
-        "babel-preset-env": "^1.6.1",
-        "jest": "^22.2.2"
-    },
-    "files": [
-        "dist.js"
-    ],
-    "babel": {
-        "presets": [],
-        "plugins": [
-            [
-                "transform-react-jsx",
-                {
-                    "pragma": "h",
-                    "useBuiltIns": true
-                }
-            ]
-        ]
+    "settings": {
+      "react": {
+        "pragma": "h"
+      }
     }
+  },
+  "ava": {
+    "babel": "inherit"
+  },
+  "release": {
+    "branch": "master"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm test"
+    }
+  }
 }
