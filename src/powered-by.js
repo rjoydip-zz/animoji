@@ -1,17 +1,22 @@
-import {h, Color} from 'ink'
-import PropTypes from 'prop-types'
+import React from 'react'
+import {h, render, Color, Component} from 'ink'
 
-const PoweredBy = ({url}) => (
-    h(
-        <div>
-            Powered By
-            <Color green>{url}</Color>
-        </div>
-    )
-)
+class PoweredBy extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            url: 'N/A'
+        }
+    }
 
-PoweredBy.propTypes = {
-    url: PropTypes.any.isRequired
+    render() {
+        return (
+            <div>
+                Powered By: &nbsp;
+                <Color green>{this.props.url || this.state.url}</Color>
+            </div>
+        )
+    }
 }
 
-export default PoweredBy
+export default render(h(PoweredBy))
